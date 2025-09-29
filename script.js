@@ -501,3 +501,21 @@ document.querySelectorAll('input, textarea').forEach(input => {
         }
     });
 });
+
+// Track button clicks for conversion optimization
+document.addEventListener('click', function(e) {
+    if (e.target.matches('.btn-primary, .btn-outline, .pricing-btn')) {
+        // Check if it's a CTA button and user needs auth
+        if (e.target.textContent.includes('Try Now') || 
+            e.target.textContent.includes('Get Started') || 
+            e.target.textContent.includes('Start Free Trial')) {
+            if (!window.userProfile?.user) {
+                e.preventDefault()
+                window.authModal.open('signup')
+                return
+            }
+        }
+        
+        // Track button clicks
+    }
+});
