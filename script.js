@@ -1,3 +1,11 @@
+// Import auth components
+import { AuthModal } from './src/components/AuthModal.js'
+import { UserProfile } from './src/components/UserProfile.js'
+
+// Initialize auth components
+window.authModal = new AuthModal()
+window.userProfile = new UserProfile()
+
 // Mobile Menu Toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
@@ -100,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Button hover effects
 document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline').forEach(button => {
+    // Skip auth buttons as they have their own handlers
+    if (button.id === 'loginBtn' || button.id === 'signupBtn') return
+    
     button.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-2px)';
     });
@@ -373,6 +384,12 @@ backToTop.addEventListener('mouseleave', () => {
 // Pricing card interactions
 document.querySelectorAll('.pricing-btn').forEach(button => {
     button.addEventListener('click', function() {
+        // Check if user is authenticated
+        if (!window.userProfile?.user) {
+            window.authModal.open('signup')
+            return
+        }
+        
         // Add loading state
         const originalText = this.textContent;
         this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
