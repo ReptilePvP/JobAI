@@ -1,11 +1,3 @@
-// Import auth components
-import { AuthModal } from './src/components/AuthModal.js'
-import { UserProfile } from './src/components/UserProfile.js'
-
-// Initialize auth components
-window.authModal = new AuthModal()
-window.userProfile = new UserProfile()
-
 // Mobile Menu Toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
